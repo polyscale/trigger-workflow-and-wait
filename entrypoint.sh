@@ -109,7 +109,7 @@ api() {
 get_workflow_runs() {
   since=${1:?}
 
-  query="event=workflow_dispatch&per_page=100"
+  query="created=>=$since&per_page=100"
 
   echo "Getting workflow runs using query: ${query}" >&2
 
