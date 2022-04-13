@@ -90,6 +90,11 @@ validate_args() {
 
 api() {
   path=$1; shift
+  echo >&2 "${GITHUB_API_URL}/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/$path" \
+      -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" \
+      -H 'Accept: application/vnd.github.v3+json' \
+      -H 'Content-Type: application/json' \
+      "$@"
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/$path" \
       -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" \
