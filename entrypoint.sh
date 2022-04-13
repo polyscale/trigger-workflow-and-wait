@@ -133,11 +133,13 @@ trigger_workflow() {
     --data "{\"ref\":\"${ref}\",\"inputs\":${client_payload}}"
 
   NEW_RUNS=$OLD_RUNS
+  echo >&2 "data: ${NEW_RUNS}"
   while [ "$NEW_RUNS" = "$OLD_RUNS" ]
   do
     echo >&2 "Sleeping for ${wait_interval} seconds"
     sleep "$wait_interval"
     NEW_RUNS=$(get_workflow_runs "$SINCE")
+    echo >&2 "data: ${NEW_RUNS}"
   done
 
   # Return new run ids
